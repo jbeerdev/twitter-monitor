@@ -1,20 +1,15 @@
-package jbeer.dev.twittermonitor.service;
+package jbeer.dev.twittermonitor.service.impl;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
+import jbeer.dev.twittermonitor.service.WebService;
+import jbeer.dev.twittermonitor.utils.StringUtils;
+
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
@@ -24,7 +19,7 @@ import org.apache.http.util.EntityUtils;
 
 import android.util.Log;
 
-public class BasicWebService{
+public class WebServiceImpl implements WebService{
 
 	DefaultHttpClient httpClient;
 	HttpContext localContext;
@@ -35,7 +30,7 @@ public class BasicWebService{
 	HttpGet httpGet = null;
 	String webServiceUrl;
 
-	public BasicWebService(String serviceName){
+	public WebServiceImpl(String serviceName){
 		HttpParams myParams = new BasicHttpParams();
 
 		HttpConnectionParams.setConnectionTimeout(myParams, 10000);
@@ -45,11 +40,12 @@ public class BasicWebService{
 		webServiceUrl = serviceName;
 
 	}
+	
+	@Override
+	public String webGet(Map<String, String> params) {
+		String getUrl = webServiceUrl;
 
-	public String webGet(String methodName, Map<String, String> params) {
-		String getUrl = webServiceUrl + methodName;
-
-		getUrl = generateUrl(params, getUrl);
+		getUrl = StringUtils.generateUrl(params, getUrl);
 
 		httpGet = new HttpGet(getUrl);
 		Log.e("WebGetURL: ",getUrl);
@@ -62,29 +58,13 @@ public class BasicWebService{
 		} catch (Exception e) {
 			Log.e("WebService:", " Messaje " + e.getMessage());
 		}
-
 		return returnedValue;
 	}
 
-	private String generateUrl(Map<String, String> params, String getUrl) {
-		int i = 0;
-		for (Map.Entry<String, String> param : params.entrySet())
-		{
-			if(i == 0){
-				getUrl += "?";
-			}
-			else{
-				getUrl += "&";
-			}
-			try {
-				getUrl += param.getKey() + "=" + URLEncoder.encode(param.getValue(),"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			i++;
-		}
-		return getUrl;
-	}
+
+	
+
+
 
 
 }

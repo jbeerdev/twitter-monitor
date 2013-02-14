@@ -6,7 +6,7 @@ import java.util.Map;
 import jbeer.dev.twittermonitor.R;
 import jbeer.dev.twittermonitor.R.layout;
 import jbeer.dev.twittermonitor.R.menu;
-import jbeer.dev.twittermonitor.service.BasicWebService;
+import jbeer.dev.twittermonitor.service.impl.WebServiceImpl;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -20,12 +20,12 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		
-		BasicWebService webService = new BasicWebService("http://search.twitter.com/search.json");
+		WebServiceImpl webService = new WebServiceImpl("http://search.twitter.com/search.json");
 		Map<String,String> params = new HashMap<String, String>(); 
 		params.put("result_type", "recent");
 		params.put("rpp", "25");
 		params.put("q", "Android");
-		String result = webService.webGet("", params);
+		String result = webService.webGet(params);
 		Log.e("JBC", "RESULT "+result);
 		
 	}
