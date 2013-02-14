@@ -1,8 +1,11 @@
-package jbeer.dev.twittermonitor;
+package jbeer.dev.twittermonitor.ui;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import jbeer.dev.twittermonitor.R;
+import jbeer.dev.twittermonitor.R.layout;
+import jbeer.dev.twittermonitor.R.menu;
 import jbeer.dev.twittermonitor.service.BasicWebService;
 import android.os.Bundle;
 import android.app.Activity;
