@@ -1,44 +1,37 @@
 package jbeer.dev.twittermonitor.ui.activity;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import jbeer.dev.twittermonitor.R;
-import jbeer.dev.twittermonitor.R.layout;
-import jbeer.dev.twittermonitor.R.menu;
-import jbeer.dev.twittermonitor.service.impl.WebServiceImpl;
+import jbeer.dev.twittermonitor.ui.adapter.TweetAdapter;
+import android.app.ListActivity;
 import android.os.Bundle;
-import android.app.Activity;
-import android.util.Log;
-import android.view.Menu;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ListActivity implements OnScrollListener {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		
-		WebServiceImpl webService = new WebServiceImpl("http://search.twitter.com/search.json");
-		Map<String,String> params = new HashMap<String, String>(); 
-		params.put("result_type", "recent");
-		params.put("rpp", "25");
-		params.put("q", "Android");
-		String result = webService.webGet(params);
-		Log.e("JBC", "RESULT "+result);
-		
-	}
+    TweetAdapter adapter = new TweetAdapter();
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setListAdapter(adapter); 
+        getListView().setOnScrollListener(this);
+    }
+
+    public void onScroll(AbsListView view,
+        int firstVisible, int visibleCount, int totalCount) {
+
+        boolean loadMore = /* maybe add a padding */
+            firstVisible + visibleCount >= totalCount;
+
+        if(loadMore) {
+            adapter.count += visibleCount; // or any other amount
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    public void onScrollStateChanged(AbsListView v, int s) { }    
+
+
 	
 //	http://search.twitter.com/search.json?q=Android&rpp=25&result_type=recent
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		
-		
-		return true;
-	}
 
 }

@@ -6,10 +6,11 @@ import android.widget.BaseAdapter;
 
 public class TweetAdapter extends BaseAdapter {
 
+	public int count = 25; 
+	
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return count;
 	}
 
 	@Override
