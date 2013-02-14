@@ -1,4 +1,4 @@
-package jbeer.dev.twittermonitor.ui;
+package jbeer.dev.twittermonitor.ui.activity;
 
 import java.util.HashMap;
 import java.util.Map;
