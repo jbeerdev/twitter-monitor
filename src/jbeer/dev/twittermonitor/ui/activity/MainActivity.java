@@ -1,12 +1,13 @@
 package jbeer.dev.twittermonitor.ui.activity;
 
+import jbeer.dev.twittermonitor.data.manager.TweetManager.TweetManagerListener;
 import jbeer.dev.twittermonitor.ui.adapter.TweetAdapter;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 
-public class MainActivity extends ListActivity implements OnScrollListener {
+public class MainActivity extends ListActivity implements OnScrollListener, TweetManagerListener {
 
     TweetAdapter adapter = new TweetAdapter();
 
@@ -28,9 +29,13 @@ public class MainActivity extends ListActivity implements OnScrollListener {
         }
     }
 
-    public void onScrollStateChanged(AbsListView v, int s) { }    
+    public void onScrollStateChanged(AbsListView v, int s) { }
 
-
+	@Override
+	public void onTweetsRetreived() {
+		// TODO Auto-generated method stub
+		
+	}    
 	
 //	http://search.twitter.com/search.json?q=Android&rpp=25&result_type=recent
 
