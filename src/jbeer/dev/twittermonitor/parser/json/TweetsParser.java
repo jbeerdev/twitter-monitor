@@ -1,9 +1,17 @@
 package jbeer.dev.twittermonitor.parser.json;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import jbeer.dev.twittermonitor.data.domain.Tweet;
+import jbeer.dev.twittermonitor.data.domain.TweetMonitor;
+
 public class TweetsParser {
-	
-	
-	
+
 	/*{"completed_in":0.021,
 	 * 	"max_id":302334521796349952,
 	 * 	"max_id_str":"302334521796349952",
@@ -56,6 +64,35 @@ public class TweetsParser {
 	 * 	"since_id_str":"0"}
 	
 	*/
+	
+	
+	public TweetMonitor parse(String webResult) throws JSONException {
+		
+		TweetMonitor tweetMonitor = new TweetMonitor();
+		
+		JSONObject json = new JSONObject(webResult);
+		String nextPage = json.getString("next_page");
+		JSONArray tweetsJson = json.getJSONArray("results");
+		
+		List<Tweet> tweetList = new ArrayList<Tweet>();
+		for (int i = 0; i < tweetsJson.length(); i++) {  
+			 Tweet tweet = new Tweet();
+		     JSONObject tweetJson = tweetsJson.getJSONObject(i);
+		     tweet.setTweet(tweetJson.getString("text"));
+		     tweet.setAvatarURl(tweetJson.getString("profile_image_url"));
+		     tweet.setUserName(tweetJson.getString("from_user"));
+		     tweet.setTime(tweetJson.getString("created_at"));
+		     tweetList.add(tweet);
+		}
+		
+		tweetMonitor.setNextPage(nextPage);
+		tweetMonitor.setTweetList(tweetList);
+		return tweetMonitor;
+	}
+	
+	
+	
+	
 	
 	
 
