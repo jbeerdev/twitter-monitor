@@ -40,7 +40,7 @@ public class WebServiceImpl implements WebService{
 		webServiceUrl = serviceName;
 
 	}
-	
+
 	@Override
 	public String webGet(Map<String, String> params) {
 		String getUrl = webServiceUrl;
@@ -60,11 +60,5 @@ public class WebServiceImpl implements WebService{
 		}
 		return returnedValue;
 	}
-
-
-	
-
-
-
 
 }

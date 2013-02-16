@@ -32,5 +32,7 @@ public class Tweet {
 	public void setTweet(String tweet) {
 		this.tweet = tweet;
 	}
+	
+	
 
 }
