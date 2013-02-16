@@ -19,7 +19,7 @@ import jbeer.dev.twittermonitor.data.domain.TweetMonitor;
 import jbeer.dev.twittermonitor.parser.json.TweetsParser;
 import jbeer.dev.twittermonitor.service.impl.WebServiceImpl;
 
-public class TweetDaoIWebmpl implements TweetDao{
+public class TweetDaoWebImpl implements TweetDao{
 
 	private static String nextPageInfo;
 	

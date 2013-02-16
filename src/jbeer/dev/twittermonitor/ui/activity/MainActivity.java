@@ -1,6 +1,12 @@
 package jbeer.dev.twittermonitor.ui.activity;
 
+import java.util.List;
+
+import jbeer.dev.twittermonitor.R;
+import jbeer.dev.twittermonitor.data.domain.Tweet;
+import jbeer.dev.twittermonitor.data.manager.TweetManager;
 import jbeer.dev.twittermonitor.data.manager.TweetManager.TweetManagerListener;
+import jbeer.dev.twittermonitor.data.manager.impl.TweetManagerImpl;
 import jbeer.dev.twittermonitor.ui.adapter.TweetAdapter;
 import android.app.ListActivity;
 import android.os.Bundle;
@@ -9,12 +15,14 @@ import android.widget.AbsListView.OnScrollListener;
 
 public class MainActivity extends ListActivity implements OnScrollListener, TweetManagerListener {
 
-    TweetAdapter adapter = new TweetAdapter();
+	 TweetAdapter adapter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setListAdapter(adapter); 
-        getListView().setOnScrollListener(this);
+        setContentView(R.layout.activity_main);
+        
+        TweetManager tweetManager = new TweetManagerImpl();
+        tweetManager.getRecentTweets(this);
     }
 
     public void onScroll(AbsListView view,
@@ -32,8 +40,10 @@ public class MainActivity extends ListActivity implements OnScrollListener, Twee
     public void onScrollStateChanged(AbsListView v, int s) { }
 
 	@Override
-	public void onTweetsRetreived() {
-		// TODO Auto-generated method stub
+	public void onTweetsRetreived(List<Tweet> tweetList) {
+		adapter = new TweetAdapter(getApplicationContext(), tweetList);
+		setListAdapter(adapter); 
+        getListView().setOnScrollListener(this);
 		
 	}    
 	

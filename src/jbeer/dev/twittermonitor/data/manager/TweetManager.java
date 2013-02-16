@@ -6,9 +6,9 @@ import jbeer.dev.twittermonitor.data.domain.Tweet;
 
 public interface TweetManager {
 	public interface TweetManagerListener{
-		public void onTweetsRetreived();
+		public void onTweetsRetreived(List<Tweet> tweetList);
 	}
 	
-	public List<Tweet> getRecentTweets();
+	public void getRecentTweets(TweetManagerListener owner);
 
 }

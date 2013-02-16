@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import jbeer.dev.twittermonitor.data.domain.Tweet;
 import jbeer.dev.twittermonitor.data.domain.TweetMonitor;
 
@@ -69,7 +71,6 @@ public class TweetsParser {
 	public TweetMonitor parse(String webResult) throws JSONException {
 		
 		TweetMonitor tweetMonitor = new TweetMonitor();
-		
 		JSONObject json = new JSONObject(webResult);
 		String nextPage = json.getString("next_page");
 		JSONArray tweetsJson = json.getJSONArray("results");
