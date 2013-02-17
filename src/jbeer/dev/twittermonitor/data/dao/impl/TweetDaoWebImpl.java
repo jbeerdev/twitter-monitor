@@ -14,6 +14,7 @@ import java.util.Map;
 import org.json.JSONException;
 
 import android.content.Context;
+import android.util.Log;
 
 import jbeer.dev.twittermonitor.data.dao.TweetDao;
 import jbeer.dev.twittermonitor.data.domain.Tweet;
@@ -37,6 +38,9 @@ public class TweetDaoWebImpl implements TweetDao{
 		
 		TweetMonitor tweetMonitor = new TweetMonitor();
 		TweetsParser tweetParser = new TweetsParser();
+		
+		Log.e("RESULT","RESULT "+webResult);
+		
 		try {
 			tweetMonitor = tweetParser.parse(webResult);
 			nextPageInfo = tweetMonitor.getNextPage();

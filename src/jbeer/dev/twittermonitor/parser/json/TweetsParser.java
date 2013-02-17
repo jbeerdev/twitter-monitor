@@ -72,7 +72,10 @@ public class TweetsParser {
 		
 		TweetMonitor tweetMonitor = new TweetMonitor();
 		JSONObject json = new JSONObject(webResult);
-		String nextPage = json.getString("next_page");
+		String nextPage = null;
+		if(json.has("next_page")){
+			nextPage = json.getString("next_page");
+		}
 		JSONArray tweetsJson = json.getJSONArray("results");
 		
 		List<Tweet> tweetList = new ArrayList<Tweet>();

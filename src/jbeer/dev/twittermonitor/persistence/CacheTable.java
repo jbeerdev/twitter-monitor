@@ -65,7 +65,7 @@ public class CacheTable {
 		Cursor tweetCursor = fetchAllTweets();
 
 		if (tweetCursor.moveToFirst() == false){
-			return tweetList;
+			return null;
 		}
 		int avatarColumnIndex = tweetCursor.getColumnIndex(KEY_AVATAR);
 		int userNameColumIndex = tweetCursor.getColumnIndex(KEY_USER_NAME);
