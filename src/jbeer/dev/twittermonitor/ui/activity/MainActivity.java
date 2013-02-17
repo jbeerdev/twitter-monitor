@@ -22,7 +22,7 @@ public class MainActivity extends ListActivity implements OnScrollListener, Twee
         setContentView(R.layout.activity_main);
         
         TweetManager tweetManager = new TweetManagerImpl();
-        tweetManager.getRecentTweets(this);
+        tweetManager.getRecentTweets(this, getApplicationContext());
     }
 
     public void onScroll(AbsListView view,

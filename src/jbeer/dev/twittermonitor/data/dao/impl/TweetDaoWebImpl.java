@@ -13,6 +13,8 @@ import java.util.Map;
 
 import org.json.JSONException;
 
+import android.content.Context;
+
 import jbeer.dev.twittermonitor.data.dao.TweetDao;
 import jbeer.dev.twittermonitor.data.domain.Tweet;
 import jbeer.dev.twittermonitor.data.domain.TweetMonitor;
